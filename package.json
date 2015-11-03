@@ -1,0 +1,23 @@
+{
+  "name": "camplight",
+  "version": "1.0.0",
+  "description": "NoSQL database wrapper (MongoDB)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lantrn/camplight.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lantrn/camplight/issues"
+  },
+  "homepage": "https://github.com/Lantrn/camplight#readme",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
