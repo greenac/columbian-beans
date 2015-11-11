@@ -18,6 +18,10 @@
   },
   "homepage": "https://github.com/Lantrn/camplight#readme",
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "jsonfile": "~2.2.3",
+    "body-parser": "~1.14.1",
+    "colors": "~1.1.2",
+    "mongodb": "~2.0.48"
   }
 }
