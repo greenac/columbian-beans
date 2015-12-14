@@ -2,10 +2,10 @@
 
 var path = require('path');
 
-var appName = 'camplight';
+var appName = 'columbian-beans';
 
 module.exports = {
     appName: appName,
-    port: process.env.CAMPLIGHT_PORT || 9042,
+    port: process.env.COLUMBIAN_BEANS_PORT || 9042,
     logFilePath: path.join(__dirname, 'files', appName + '.log')
 };
