@@ -2,7 +2,7 @@
 
 var DbWrapper = require('./db-wrapper');
 var JsonResponse = require('./json-response');
-var Logger = require('./logger');
+var logger = require('gruew-logger');
 
 module.exports = {
     getRecordById: function (req, res) {
@@ -19,10 +19,9 @@ module.exports = {
     },
 
     getAllRecords: function (req, res) {
-        Logger.log(
-            'getting all records for: ' + JSON.stringify(req.body),
+        logger.log(
+            ['getting all records for:', req.body],
             __filename,
-            false,
             false
         );
 
@@ -35,7 +34,7 @@ module.exports = {
     },
 
     saveRecords: function (req, res) {
-        Logger.log('Saving record: ' + JSON.stringify(req.body), __filename, false, false);
+        logger.log(['Saving record:', req.body], __filename, false);
         var dbWrapper = new DbWrapper(req.body.database);
         dbWrapper.insert(req.body.collection, req.body.payload, function (error, result) {
             var message = null;

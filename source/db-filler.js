@@ -2,7 +2,7 @@
 
 var jsonFile = require('jsonfile');
 var DbWrapper = require('./db-wrapper');
-var Logger = require('./logger');
+var logger = require('gruew-logger');
 var path = require('path');
 
 module.exports = {
@@ -12,11 +12,11 @@ module.exports = {
         var dbWrapper = new DbWrapper('camplight');
         dbWrapper.insert('clients', clients, function (error, result) {
             if (error) {
-                Logger.log('Failed to fill clients database', __filename, true, false);
+                logger.log(['Failed to fill clients database'], __filename, true);
                 return;
             }
 
-            Logger.log('Filled clients database', __filename, false, false);
+            logger.log(['Filled clients database'], __filename, false);
         });
     }
 };
