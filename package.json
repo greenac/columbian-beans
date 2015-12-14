@@ -1,27 +1,28 @@
 {
-  "name": "camplight",
+  "name": "columbian-beans",
   "version": "1.0.0",
   "description": "NoSQL database wrapper (MongoDB)",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node entry.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Lantrn/camplight.git"
+    "url": "git+https://github.com/hot-coffee/columbian-beans.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Lantrn/camplight/issues"
+    "url": "https://github.com/hot-coffee/columbian-beans/issues"
   },
-  "homepage": "https://github.com/Lantrn/camplight#readme",
+  "homepage": "https://https://github.com/hot-coffee/columbian-beanst#readme",
   "dependencies": {
-    "express": "^4.13.3",
-    "jsonfile": "~2.2.3",
     "body-parser": "~1.14.1",
     "colors": "~1.1.2",
+    "express": "^4.13.3",
+    "gruew-logger": "^1.0.6",
+    "jsonfile": "~2.2.3",
     "mongodb": "~2.0.48"
   }
 }

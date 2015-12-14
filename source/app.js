@@ -2,7 +2,7 @@
 
 var express = require('express');
 var bodyParser = require('body-parser');
-var Logger = require('./logger');
+var logger = require('grew-logger');
 var RequestHandler = require('./request-handler');
 var DbFiller = require('./db-filler');
 var config = require('./config');
@@ -23,9 +23,8 @@ function App() {
             var port = config.port;
             var server = app.listen(port, function () {
                 Logger.log(
-                    'camplight server running on port: ' + port.toString(),
+                    ['camplight server running on port:', port],
                     __filename,
-                    false,
                     false
                 );
             });

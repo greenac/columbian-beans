@@ -1,28 +1,26 @@
 'use strict';
 
 var MongoClient = require('mongodb').MongoClient;
-var Logger = require('./logger');
+var logger = require('gruew-logger');
 var ObjectID = require('mongodb').ObjectID;
 
 function DbWrapper(database) {
     this.dbPath = 'mongodb://localhost:27017/' + database;
 
     this._connect = function(callback) {
-        console.log('url:', this.dbPath);
         MongoClient.connect(this.dbPath, function (err, db) {
             if (err) {
-                Logger.log(
-                    'Failed to connect to db: ' + this.dbPath,
+                logger.log(
+                    ['Failed to connect to db:', this.dbPath],
                     __filename,
-                    true,
-                    false
+                    true
                 );
 
                 callback(err, null);
                 return;
             }
 
-            Logger.log('Connected to database: ' + this.dbPath, __filename, false, false);
+            logger.log(['Connected to database:', this.dbPath], __filename, false);
 
             if (callback) {
                 callback(err, db);
@@ -31,20 +29,19 @@ function DbWrapper(database) {
     };
 
     this.insert = function(collectionName, insertObjects, callback) {
-        Logger.log('Inserting objects: ' + JSON.stringify(insertObjects), __filename, false, false);
+        logger.log(['Inserting objects: ', insertObjects], __filename, false);
         this._connect(function (err, db) {
             if (err) {
-                Logger.log('Failed to connect to db: ' + this.dbPath, __filename, true, false);
+                logger.log(['Failed to connect to db:', this.dbPath], __filename, true);
                 callback(err, null);
                 return;
             }
 
-            Logger.log('Connected to database: ' + this.dbPath, __filename, false, false);
+            logger.log(['Connected to database: ', this.dbPath], __filename, false);
 
-            Logger.log(
-                'Inserting into collection: ' + collectionName + ' object: ' + JSON.stringify(insertObjects),
+            logger.log(
+                ['Inserting into collection:', collectionName, 'object:', insertObjects],
                 __filename,
-                false,
                 false
             );
 
@@ -52,11 +49,10 @@ function DbWrapper(database) {
             collection.insertMany(insertObjects, function (error, result) {
                 db.close();
                 if (error) {
-                    Logger.log(
-                        'Inserting into collection: ' + collectionName,
+                    logger.log(
+                        ['Inserting into collection: ', collectionName],
                         __filename,
-                        true,
-                        false
+                        true
                     );
 
                     callback(error, null);
@@ -64,12 +60,9 @@ function DbWrapper(database) {
                 }
 
                 if (callback) {
-                    var message = 'Inserted: ' + JSON.stringify(insertObjects) +
-                        '\n Into: ' + collectionName + '\n with response: ' + JSON.stringify(result);
-                    Logger.log(
-                        message,
+                    logger.log(
+                        ['Inserted:', insertObjects, '\n Into:', collectionName, '\n with response: ', result],
                         __filename,
-                        false,
                         false
                     );
 
@@ -80,25 +73,24 @@ function DbWrapper(database) {
     };
 
     this.retrieveAll = function (collectionName, callback) {
-        Logger.log('Retrieving objects for: ' + collectionName, __filename, false, false);
+        logger.log(['Retrieving objects for: ', collectionName], __filename, false);
         this._connect(function (err, db) {
             if (err) {
-                Logger.log('Error: failed to connect to db: ' + this.dbPath, __filename, true, false);
+                logger.log(['Error: failed to connect to db:', this.dbPath], __filename, true);
                 callback(err, null);
                 return;
             }
 
-            Logger.log('Connected to database: ' + this.dbPath, __filename, false, false);
+            logger.log(['Connected to database:', this.dbPath], __filename, false);
 
             var collection = db.collection(collectionName);
             collection.find().toArray(function(error, result) {
                 db.close();
                 if (error) {
-                    Logger.log(
-                        'Retrieving all objects from: ' + collectionName,
+                    logger.log(
+                        ['Retrieving all objects from:', collectionName],
                         __filename,
-                        true,
-                        false
+                        true
                     );
 
                     callback(error, null);
@@ -113,32 +105,30 @@ function DbWrapper(database) {
     };
 
     this.retrieveWithId = function (collectionName, id, callback) {
-        Logger.log('Retrieving objects for: ' + collectionName, __filename, false, false);
+        logger.log(['Retrieving objects for:', collectionName], __filename, false);
         this._connect(function (err, db) {
             if (err) {
-                Logger.log(
-                    'Failed to connect to db: ' + this.dbPath,
+                logger.log(
+                    ['Failed to connect to db:', this.dbPath],
                     __filename,
-                    true,
-                    false
+                    true
                 );
 
                 callback(err, null);
                 return;
             }
 
-            Logger.log('Connected to database: ' + this.dbPath, __filename, false, false);
+            logger.log(['Connected to database:', this.dbPath], __filename, false);
 
             var objectId = new ObjectID(id);
             var collection = db.collection(collectionName);
             collection.find({_id:objectId}).toArray(function(error, result) {
                 db.close();
                 if (error) {
-                    Logger.log(
-                        'Retrieving all objects from: ' + collectionName,
+                    logger.log(
+                        ['Retrieving all objects from: ', collectionName],
                         __filename,
-                        true,
-                        false
+                        true
                     );
 
                     callback(error, null);
