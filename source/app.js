@@ -2,7 +2,7 @@
 
 var express = require('express');
 var bodyParser = require('body-parser');
-var logger = require('grew-logger');
+var logger = require('gruew-logger');
 var RequestHandler = require('./request-handler');
 var DbFiller = require('./db-filler');
 var config = require('./config');
@@ -10,7 +10,7 @@ var config = require('./config');
 function App() {
     this.run = function () {
         if (process.argv.length > 2 && process.argv[2] === 'filldb') {
-            Logger.log('Filling the database', __filename, false, false);
+            logger.log(['Filling the database'], __filename, false);
             DbFiller.fill();
         } else {
             var app = express();
@@ -22,7 +22,7 @@ function App() {
 
             var port = config.port;
             var server = app.listen(port, function () {
-                Logger.log(
+                logger.log(
                     ['camplight server running on port:', port],
                     __filename,
                     false
