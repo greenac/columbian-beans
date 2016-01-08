@@ -7,6 +7,7 @@ var RequestHandler = require('./request-handler');
 var DbFiller = require('./db-filler');
 var config = require('./config');
 
+
 function App() {
     this.run = function () {
         if (process.argv.length > 2 && process.argv[2] === 'filldb') {

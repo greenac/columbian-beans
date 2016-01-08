@@ -1,7 +1,7 @@
 'use strict';
 
 var DbWrapper = require('./db-wrapper');
-var JsonResponse = require('./json-response');
+var jsonResponse = require('./json-response');
 var logger = require('gruew-logger');
 
 module.exports = {
@@ -9,8 +9,7 @@ module.exports = {
         var postData = req.body;
         var dbWrapper = new DbWrapper(postData.database);
         dbWrapper.retrieveWithId(postData.collection, postData.id, function (error, result) {
-            var jsonResponse = new JsonResponse(error, result, res);
-            jsonResponse.respond();
+            jsonResponse(error, result, res);
         });
     },
 
@@ -28,8 +27,7 @@ module.exports = {
         var postData = req.body;
         var dbWrapper = new DbWrapper(postData.database);
         dbWrapper.retrieveAll(postData.collection, function (error, result) {
-            var jsonResponse = new JsonResponse(error, result, res);
-            jsonResponse.respond();
+            jsonResponse(error, result, res);
         });
     },
 
@@ -42,8 +40,7 @@ module.exports = {
                 message = 'successfully saved object with _id: '  + req.body.payload._id;
             }
 
-            var jsonResponse = new JsonResponse(error, message, res);
-            jsonResponse.respond();
+            jsonResponse(error, message, res);
         });
     }
 };
