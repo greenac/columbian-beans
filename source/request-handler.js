@@ -14,7 +14,7 @@ module.exports = {
     },
 
     getMultipleRecords: function (req, res) {
-
+        // TODO figure out what should be sent down
     },
 
     getAllRecords: function (req, res) {
