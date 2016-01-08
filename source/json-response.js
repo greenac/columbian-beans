@@ -1,18 +1,8 @@
 'use strict';
 
-function JsonResponse(error, result, response) {
-    this.error = error;
-    this.result = result;
-    this.response = response;
-
-    this.respond = function() {
-        var responseObject = {
-            error: this.error,
-            result: this.result
-        };
-
-        this.response.send(JSON.stringify(responseObject));
-    }
-}
-
-module.exports = JsonResponse;
+module.exports = function (error, payload, response) {
+    response.send(JSON.stringify({
+        error: error,
+        payload: payload
+    }));
+};

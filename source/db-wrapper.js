@@ -50,7 +50,7 @@ function DbWrapper(database) {
                 db.close();
                 if (error) {
                     logger.log(
-                        ['Inserting into collection: ', collectionName],
+                        ['Inserting into collection:', collectionName, 'error:', error],
                         __filename,
                         true
                     );
