@@ -3,9 +3,11 @@
 var MongoClient = require('mongodb').MongoClient;
 var logger = require('gruew-logger');
 var ObjectID = require('mongodb').ObjectID;
+var config = require('./config');
+
 
 function DbWrapper(database) {
-    this.dbPath = 'mongodb://localhost:27017/' + database;
+    this.dbPath = config.mongoPath + database;
 
     this._connect = function(callback) {
         MongoClient.connect(this.dbPath, function (err, db) {
